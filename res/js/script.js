@@ -73,7 +73,8 @@ $(function () {
             "<td>" + (newCourse.grade) +
             "</td>" +
             "</tr>");
-        $('#gpa > strong').text(recalculateGPA());
+        user.gpa = recalculateGPA();
+        $('#gpa > strong').text(user.gpa);
         $('#add-course :input').val('');
         $('#add-course').removeClass('active');
     });
@@ -100,8 +101,7 @@ $(function () {
                     break;
             }
         }
-        let gpa = Math.round(sum / courses.length * 100) / 100;
-        return gpa;
+        return Math.round(sum / courses.length * 100) / 100;
 
     }
 
