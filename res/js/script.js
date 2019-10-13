@@ -1,8 +1,9 @@
 $(function () {
-    let user = new User("John", "Doe", new Date("1990-10-13"), "CS");
+    let user = new User("John", "Doe", new Date("1990-10-13"), "CS", 0);
     $("#name").text(user.firstName + " " + user.lastName);
     $("#birthdate").text(user.birthDate.toLocaleDateString("et-EE"));
     $("#faculty").text(user.faculty);
+    $('#gpa > strong').html(gpa);
 
     let courses = [
         new Course("Agile software development", 1, 82),
@@ -10,7 +11,7 @@ $(function () {
         new Course("Object-oriented programming", 2, 99),
         new Course("Estonian language level A2", 2, 65)
     ];
-
+    recalculateGPA();
 
     let $courseTableBody = $("#courses > tbody");
     for (let i = 0; i < courses.length; i++) {
@@ -73,12 +74,12 @@ $(function () {
             "<td>" + (newCourse.grade) +
             "</td>" +
             "</tr>");
-        $('#gpa > strong').html(getGPA());
+        recalculateGPA();
         $('#add-course :input').val('');
         $('#add-course').removeClass('active');
     });
 
-    function getGPA() {
+    function recalculateGPA() {
         let sum = 0;
         for (let i = 0; i < courses.length; i++) {
             let grade = courses[i].grade;
@@ -100,7 +101,9 @@ $(function () {
                     break;
             }
         }
-        return Math.round(sum / courses.length * 100) / 100
+        let gpa = Math.round(sum / courses.length * 100) / 100;
+        user.gpa = gpa;
+        $('#gpa > strong').html(gpa);
 
     }
 
