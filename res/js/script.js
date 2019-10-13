@@ -12,7 +12,6 @@ $(function () {
     ];
 
 
-
     let $courseTableBody = $("#courses > tbody");
     for (let i = 0; i < courses.length; i++) {
         $courseTableBody.append(
@@ -54,8 +53,12 @@ $(function () {
 
     $('#add-course-button').click(function () {
         $('#add-course').toggleClass("active");
-    })
+    });
 
+    $('#cancel-course').click(function () {
+        $('#add-course :input').val('');
+        $('#add-course').removeClass('active');
+    });
 
 
 });
