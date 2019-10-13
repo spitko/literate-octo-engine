@@ -11,6 +11,8 @@ $(function () {
         new Course("Estonian language level A2", 2, 65)
     ];
 
+
+
     let $courseTableBody = $("#courses > tbody");
     for (let i = 0; i < courses.length; i++) {
         $courseTableBody.append(
@@ -25,5 +27,35 @@ $(function () {
             "</td>" +
             "</tr>")
     }
+
+    $('#courses-button').click(function (event) {
+
+        $('#courses-container')
+            .addClass("active");
+        $('#profile-container')
+            .removeClass("active");
+        $(event.target)
+            .addClass("active");
+        $('#profile-button')
+            .removeClass("active")
+    });
+
+    $('#profile-button').click(function (event) {
+
+        $('#courses-container')
+            .removeClass("active");
+        $('#profile-container')
+            .addClass("active");
+        $(event.target)
+            .addClass("active");
+        $('#courses-button')
+            .removeClass("active")
+    });
+
+    $('#add-course-button').click(function () {
+        $('#add-course').toggleClass("active");
+    })
+
+
 
 });
