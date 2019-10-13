@@ -60,5 +60,48 @@ $(function () {
         $('#add-course').removeClass('active');
     });
 
+    $('#save-course').click(function () {
+        let newCourse = new Course($('#title').val(), $('#semester').val(), $('#grade').val());
+        courses.push(newCourse);
+        $('#courses > tbody').append("<tr>" +
+            "<td>" + (courses.length) +
+            "</td>" +
+            "<td>" + (newCourse.title) +
+            "</td>" +
+            "<td>" + (newCourse.semester) +
+            "</td>" +
+            "<td>" + (newCourse.grade) +
+            "</td>" +
+            "</tr>");
+        $('#gpa > strong').html(getGPA());
+        $('#add-course :input').val('');
+        $('#add-course').removeClass('active');
+    });
+
+    function getGPA() {
+        let sum = 0;
+        for (let i = 0; i < courses.length; i++) {
+            let grade = courses[i].grade;
+            switch (true) {
+                case grade > 90:
+                    sum += 4;
+                    break;
+                case grade > 80:
+                    sum += 3;
+                    break;
+                case grade > 70:
+                    sum += 2;
+                    break;
+                case grade > 60:
+                    sum += 1;
+                    break;
+                case grade > 50:
+                    sum += 0.5;
+                    break;
+            }
+        }
+        return Math.round(sum / courses.length * 100) / 100
+
+    }
 
 });
