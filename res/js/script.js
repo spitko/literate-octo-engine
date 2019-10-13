@@ -3,7 +3,7 @@ $(function () {
     $("#name").text(user.firstName + " " + user.lastName);
     $("#birthdate").text(user.birthDate.toLocaleDateString("et-EE"));
     $("#faculty").text(user.faculty);
-    $('#gpa > strong').html(gpa);
+    $('#gpa > strong').html(user.gpa);
 
     let courses = [
         new Course("Agile software development", 1, 82),
